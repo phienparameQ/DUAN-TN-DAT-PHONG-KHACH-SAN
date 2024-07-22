@@ -1,10 +1,22 @@
+package com.example.duan_tn_booking.entity;
 
-import javax.persistence.*;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.HashSet;
+import java.util.Set;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "ChiTietPhong")
 public class ChiTietPhong {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_chi_tiet_phong")
     private Integer idChiTietPhong;
 
@@ -12,73 +24,28 @@ public class ChiTietPhong {
     private String soLuong;
 
     @Column(name = "gia")
-    private BigDecimal gia;
+    private Long gia;
 
     @Column(name = "trangThai")
     private Boolean trangThai;
 
-    @Column(name = "id_phong")
-    private Integer idPhong;
+    @ManyToOne
+    @JoinColumn(name = "id_phong",referencedColumnName = "id_phong")
+    private Phong phong;
 
-    @Column(name = "id_tang")
-    private Integer idTang;
+    @ManyToOne
+    @JoinColumn(name = "id_tang",referencedColumnName = "id_tang")
+    private Tang tang;
 
-    @Column(name = "id_dien_tich")
-    private Integer idDienTich;
+    @ManyToOne
+    @JoinColumn(name = "id_dien_tich",referencedColumnName = "id_dien_tich")
+    private DienTichPhong dienTichPhong;
 
-    public Integer getIdChiTietPhong() {
-        return this.idChiTietPhong;
-    }
+    @OneToMany
+    @JoinColumn(name = "setCTDatPhong")
+    private Set<ChiTietDatPhong> chiTietDatPhongs = new HashSet<>();
 
-    public void setIdChiTietPhong(Integer idChiTietPhong) {
-        this.idChiTietPhong = idChiTietPhong;
-    }
-
-    public String getSoLuong() {
-        return this.soLuong;
-    }
-
-    public void setSoLuong(String soLuong) {
-        this.soLuong = soLuong;
-    }
-
-    public BigDecimal getGia() {
-        return this.gia;
-    }
-
-    public void setGia(BigDecimal gia) {
-        this.gia = gia;
-    }
-
-    public Boolean getTrangThai() {
-        return this.trangThai;
-    }
-
-    public void setTrangThai(Boolean trangThai) {
-        this.trangThai = trangThai;
-    }
-
-    public Integer getIdPhong() {
-        return this.idPhong;
-    }
-
-    public void setIdPhong(Integer idPhong) {
-        this.idPhong = idPhong;
-    }
-
-    public Integer getIdTang() {
-        return this.idTang;
-    }
-
-    public void setIdTang(Integer idTang) {
-        this.idTang = idTang;
-    }
-
-    public Integer getIdDienTich() {
-        return this.idDienTich;
-    }
-
-    public void setIdDienTich(Integer idDienTich) {
-        this.idDienTich = idDienTich;
-    }
+    @OneToMany
+    @JoinColumn(name = "setDanhGia")
+    private Set<DanhGia> setDanhGias = new HashSet<>();
 }

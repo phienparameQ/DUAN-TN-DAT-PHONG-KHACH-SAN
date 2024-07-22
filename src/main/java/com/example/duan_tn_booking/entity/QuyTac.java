@@ -1,10 +1,18 @@
+package com.example.duan_tn_booking.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "QuyTac")
 public class QuyTac {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_quy_tac")
     private Integer idQuyTac;
 
@@ -12,40 +20,9 @@ public class QuyTac {
     private String maQuyTac;
 
     @Column(name = "noi_dung")
-    private null noiDung;
+    private String noiDung;
 
     @Column(name = "mo_ta")
-    private null moTa;
+    private String moTa;
 
-    public Integer getIdQuyTac() {
-        return this.idQuyTac;
-    }
-
-    public void setIdQuyTac(Integer idQuyTac) {
-        this.idQuyTac = idQuyTac;
-    }
-
-    public String getMaQuyTac() {
-        return this.maQuyTac;
-    }
-
-    public void setMaQuyTac(String maQuyTac) {
-        this.maQuyTac = maQuyTac;
-    }
-
-    public null getNoiDung() {
-        return this.noiDung;
-    }
-
-    public void setNoiDung(null noiDung) {
-        this.noiDung = noiDung;
-    }
-
-    public null getMoTa() {
-        return this.moTa;
-    }
-
-    public void setMoTa(null moTa) {
-        this.moTa = moTa;
-    }
 }

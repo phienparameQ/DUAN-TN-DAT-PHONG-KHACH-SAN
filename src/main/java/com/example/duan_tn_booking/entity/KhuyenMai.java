@@ -1,10 +1,23 @@
+package com.example.duan_tn_booking.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "KhuyenMai")
 public class KhuyenMai {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_khuyen_mai")
     private Integer idKhuyenMai;
 
@@ -15,81 +28,29 @@ public class KhuyenMai {
     private String tenKhuyenMai;
 
     @Column(name = "mo_ta")
-    private null moTa;
+    private String moTa;
 
     @Column(name = "ngay_bat_dau")
-    private null ngayBatDau;
+    private Date ngayBatDau;
 
     @Column(name = "ngay_ket_thuc")
-    private null ngayKetThuc;
+    private Date ngayKetThuc;
 
     @Column(name = "giam_gia")
-    private null giamGia;
+    private Float giamGia;
 
     @Column(name = "loai_giam")
     private Boolean loaiGiam;
 
-    public Integer getIdKhuyenMai() {
-        return this.idKhuyenMai;
-    }
+    @OneToMany
+    @JoinColumn(name = "setCTDatPhong")
+    private Set<ChiTietDatPhong> chiTietDatPhongs = new HashSet<>();
 
-    public void setIdKhuyenMai(Integer idKhuyenMai) {
-        this.idKhuyenMai = idKhuyenMai;
-    }
+    @OneToMany
+    @JoinColumn(name = "setDatPhong")
+    private Set<DatPhong> datPhongs = new HashSet<>();
 
-    public String getMaKhuyenMai() {
-        return this.maKhuyenMai;
-    }
-
-    public void setMaKhuyenMai(String maKhuyenMai) {
-        this.maKhuyenMai = maKhuyenMai;
-    }
-
-    public String getTenKhuyenMai() {
-        return this.tenKhuyenMai;
-    }
-
-    public void setTenKhuyenMai(String tenKhuyenMai) {
-        this.tenKhuyenMai = tenKhuyenMai;
-    }
-
-    public null getMoTa() {
-        return this.moTa;
-    }
-
-    public void setMoTa(null moTa) {
-        this.moTa = moTa;
-    }
-
-    public null getNgayBatDau() {
-        return this.ngayBatDau;
-    }
-
-    public void setNgayBatDau(null ngayBatDau) {
-        this.ngayBatDau = ngayBatDau;
-    }
-
-    public null getNgayKetThuc() {
-        return this.ngayKetThuc;
-    }
-
-    public void setNgayKetThuc(null ngayKetThuc) {
-        this.ngayKetThuc = ngayKetThuc;
-    }
-
-    public null getGiamGia() {
-        return this.giamGia;
-    }
-
-    public void setGiamGia(null giamGia) {
-        this.giamGia = giamGia;
-    }
-
-    public Boolean getLoaiGiam() {
-        return this.loaiGiam;
-    }
-
-    public void setLoaiGiam(Boolean loaiGiam) {
-        this.loaiGiam = loaiGiam;
-    }
+    @OneToMany
+    @JoinColumn(name = "setKhuyenMaiKH")
+    private Set<KhuyenMaiKhachHang> khuyenMaiKhachHangs = new HashSet<>();
 }

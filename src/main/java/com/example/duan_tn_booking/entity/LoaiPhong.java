@@ -1,10 +1,22 @@
+package com.example.duan_tn_booking.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "LoaiPhong")
 public class LoaiPhong {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_loai_phong")
     private Integer idLoaiPhong;
 
@@ -15,7 +27,7 @@ public class LoaiPhong {
     private String tenLoaiPhong;
 
     @Column(name = "mo_ta")
-    private null moTa;
+    private String moTa;
 
     @Column(name = "so_luong_giuong")
     private Integer soLuongGiuong;
@@ -24,61 +36,10 @@ public class LoaiPhong {
     private Integer soNguoiToiDa;
 
     @Column(name = "gia")
-    private BigDecimal gia;
+    private Float gia;
 
-    public Integer getIdLoaiPhong() {
-        return this.idLoaiPhong;
-    }
+    @OneToMany
+    @JoinColumn(name = "setPhong")
+    private Set<Phong> phongs = new HashSet<>();
 
-    public void setIdLoaiPhong(Integer idLoaiPhong) {
-        this.idLoaiPhong = idLoaiPhong;
-    }
-
-    public String getMaLoaiPhong() {
-        return this.maLoaiPhong;
-    }
-
-    public void setMaLoaiPhong(String maLoaiPhong) {
-        this.maLoaiPhong = maLoaiPhong;
-    }
-
-    public String getTenLoaiPhong() {
-        return this.tenLoaiPhong;
-    }
-
-    public void setTenLoaiPhong(String tenLoaiPhong) {
-        this.tenLoaiPhong = tenLoaiPhong;
-    }
-
-    public null getMoTa() {
-        return this.moTa;
-    }
-
-    public void setMoTa(null moTa) {
-        this.moTa = moTa;
-    }
-
-    public Integer getSoLuongGiuong() {
-        return this.soLuongGiuong;
-    }
-
-    public void setSoLuongGiuong(Integer soLuongGiuong) {
-        this.soLuongGiuong = soLuongGiuong;
-    }
-
-    public Integer getSoNguoiToiDa() {
-        return this.soNguoiToiDa;
-    }
-
-    public void setSoNguoiToiDa(Integer soNguoiToiDa) {
-        this.soNguoiToiDa = soNguoiToiDa;
-    }
-
-    public BigDecimal getGia() {
-        return this.gia;
-    }
-
-    public void setGia(BigDecimal gia) {
-        this.gia = gia;
-    }
 }

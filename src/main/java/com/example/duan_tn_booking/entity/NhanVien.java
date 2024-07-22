@@ -1,10 +1,23 @@
+package com.example.duan_tn_booking.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "NhanVien")
 public class NhanVien {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_nhan_vien")
     private Integer idNhanVien;
 
@@ -15,7 +28,7 @@ public class NhanVien {
     private String hoTen;
 
     @Column(name = "ngay_sinh")
-    private null ngaySinh;
+    private Date ngaySinh;
 
     @Column(name = "gioi_tinh")
     private String gioiTinh;
@@ -27,80 +40,17 @@ public class NhanVien {
     private String soDienThoai;
 
     @Column(name = "luong")
-    private BigDecimal luong;
+    private Float luong;
 
-    @Column(name = "ten_dang_nhap")
-    private String tenDangNhap;
+    @ManyToOne
+    @JoinColumn(name = "ten_dang_nhap",referencedColumnName = "ten_dang_nhap")
+    private TaiKhoan taiKhoan;
 
-    public Integer getIdNhanVien() {
-        return this.idNhanVien;
-    }
+    @OneToMany
+    @JoinColumn(name = "setCSKH")
+    private Set<ChamSocKhachHang> chamSocKhachHangs = new HashSet<>();
 
-    public void setIdNhanVien(Integer idNhanVien) {
-        this.idNhanVien = idNhanVien;
-    }
-
-    public String getMaNhanVien() {
-        return this.maNhanVien;
-    }
-
-    public void setMaNhanVien(String maNhanVien) {
-        this.maNhanVien = maNhanVien;
-    }
-
-    public String getHoTen() {
-        return this.hoTen;
-    }
-
-    public void setHoTen(String hoTen) {
-        this.hoTen = hoTen;
-    }
-
-    public null getNgaySinh() {
-        return this.ngaySinh;
-    }
-
-    public void setNgaySinh(null ngaySinh) {
-        this.ngaySinh = ngaySinh;
-    }
-
-    public String getGioiTinh() {
-        return this.gioiTinh;
-    }
-
-    public void setGioiTinh(String gioiTinh) {
-        this.gioiTinh = gioiTinh;
-    }
-
-    public String getDiaChi() {
-        return this.diaChi;
-    }
-
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
-    }
-
-    public String getSoDienThoai() {
-        return this.soDienThoai;
-    }
-
-    public void setSoDienThoai(String soDienThoai) {
-        this.soDienThoai = soDienThoai;
-    }
-
-    public BigDecimal getLuong() {
-        return this.luong;
-    }
-
-    public void setLuong(BigDecimal luong) {
-        this.luong = luong;
-    }
-
-    public String getTenDangNhap() {
-        return this.tenDangNhap;
-    }
-
-    public void setTenDangNhap(String tenDangNhap) {
-        this.tenDangNhap = tenDangNhap;
-    }
+    @OneToMany
+    @JoinColumn(name = "setLichLamViec")
+    private Set<LichLamViec> lichLamViecs = new HashSet<>();
 }

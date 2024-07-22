@@ -1,10 +1,23 @@
+package com.example.duan_tn_booking.entity;
 
-import javax.persistence.*;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.HashSet;
+import java.util.Set;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "KhachHang")
 public class KhachHang {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_khach_hang")
     private Integer idKhachHang;
 
@@ -24,83 +37,28 @@ public class KhachHang {
     private String ngaySinh;
 
     @Column(name = "gioi_tinh")
-    private null gioiTinh;
+    private String gioiTinh;
 
     @Column(name = "dia_chi")
     private String diaChi;
 
-    @Column(name = "ten_dang_nhap")
-    private String tenDangNhap;
+    @ManyToOne
+    @JoinColumn(name = "ten_dang_nhap",referencedColumnName = "ten_dang_nhap")
+    private TaiKhoan taiKhoan;
 
-    public Integer getIdKhachHang() {
-        return this.idKhachHang;
-    }
+    @OneToMany
+    @JoinColumn(name = "setCSKH")
+    private Set<ChamSocKhachHang> chamSocKhachHangs = new HashSet<>();
 
-    public void setIdKhachHang(Integer idKhachHang) {
-        this.idKhachHang = idKhachHang;
-    }
+    @OneToMany
+    @JoinColumn(name = "setCTDatPhong")
+    private Set<ChiTietDatPhong> chiTietDatPhongs = new HashSet<>();
 
-    public String getMaKhachHang() {
-        return this.maKhachHang;
-    }
+    @OneToMany
+    @JoinColumn(name = "setDatPhong")
+    private Set<DatPhong> datPhongs = new HashSet<>();
 
-    public void setMaKhachHang(String maKhachHang) {
-        this.maKhachHang = maKhachHang;
-    }
-
-    public String getHoTen() {
-        return this.hoTen;
-    }
-
-    public void setHoTen(String hoTen) {
-        this.hoTen = hoTen;
-    }
-
-    public String getSdt() {
-        return this.sdt;
-    }
-
-    public void setSdt(String sdt) {
-        this.sdt = sdt;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getNgaySinh() {
-        return this.ngaySinh;
-    }
-
-    public void setNgaySinh(String ngaySinh) {
-        this.ngaySinh = ngaySinh;
-    }
-
-    public null getGioiTinh() {
-        return this.gioiTinh;
-    }
-
-    public void setGioiTinh(null gioiTinh) {
-        this.gioiTinh = gioiTinh;
-    }
-
-    public String getDiaChi() {
-        return this.diaChi;
-    }
-
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
-    }
-
-    public String getTenDangNhap() {
-        return this.tenDangNhap;
-    }
-
-    public void setTenDangNhap(String tenDangNhap) {
-        this.tenDangNhap = tenDangNhap;
-    }
+    @OneToMany
+    @JoinColumn(name = "setTichDiem")
+    private Set<TichDiem> tichDiems = new HashSet<>();
 }

@@ -1,62 +1,36 @@
+package com.example.duan_tn_booking.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "LichLamViec")
 public class LichLamViec {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_lich_lam_viec")
     private Integer idLichLamViec;
 
     @Column(name = "ma_lich_lam_viec")
     private String maLichLamViec;
 
-    @Column(name = "id_nhan_vien")
-    private Integer idNhanVien;
+    @ManyToOne
+    @JoinColumn(name = "id_nhan_vien",referencedColumnName = "id_nhan_vien")
+    private NhanVien nhanVien;
 
     @Column(name = "ngay")
-    private null ngay;
+    private Date ngay;
 
     @Column(name = "giao_ca")
-    private null giaoCa;
+    private LocalDateTime giaoCa;
 
-    public Integer getIdLichLamViec() {
-        return this.idLichLamViec;
-    }
-
-    public void setIdLichLamViec(Integer idLichLamViec) {
-        this.idLichLamViec = idLichLamViec;
-    }
-
-    public String getMaLichLamViec() {
-        return this.maLichLamViec;
-    }
-
-    public void setMaLichLamViec(String maLichLamViec) {
-        this.maLichLamViec = maLichLamViec;
-    }
-
-    public Integer getIdNhanVien() {
-        return this.idNhanVien;
-    }
-
-    public void setIdNhanVien(Integer idNhanVien) {
-        this.idNhanVien = idNhanVien;
-    }
-
-    public null getNgay() {
-        return this.ngay;
-    }
-
-    public void setNgay(null ngay) {
-        this.ngay = ngay;
-    }
-
-    public null getGiaoCa() {
-        return this.giaoCa;
-    }
-
-    public void setGiaoCa(null giaoCa) {
-        this.giaoCa = giaoCa;
-    }
 }

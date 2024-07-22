@@ -1,95 +1,53 @@
+package com.example.duan_tn_booking.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "ChiTietDatPhong")
 public class ChiTietDatPhong {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_chi_tiet_dat_phong")
     private Integer idChiTietDatPhong;
 
     @Column(name = "ma_chi_tiet_dat_phong")
     private String maChiTietDatPhong;
 
-    @Column(name = "id_dat_phong")
-    private Integer idDatPhong;
+    @ManyToOne
+    @JoinColumn(name = "id_dat_phong",referencedColumnName = "id_dat_phong")
+    private DatPhong datPhong;
 
-    @Column(name = "id_khach_hang")
-    private Integer idKhachHang;
+    @ManyToOne
+    @JoinColumn(name = "id_khach_hang",referencedColumnName = "id_khach_hang")
+    private KhachHang khachHang;
 
-    @Column(name = "id_khuyen_mai")
-    private Integer idKhuyenMai;
+    @ManyToOne
+    @JoinColumn(name = "id_khuyen_mai",referencedColumnName = "id_khuyen_mai")
+    private KhuyenMai khuyenMai;
 
-    @Column(name = "id_chi_tiet_phong")
-    private Integer idChiTietPhong;
+    @ManyToOne
+    @JoinColumn(name = "id_chi_tiet_phong",referencedColumnName = "id_chi_tiet_phong")
+    private ChiTietPhong chiTietPhong;
 
     @Column(name = "ngay_lap")
-    private null ngayLap;
+    private Date ngayLap;
 
     @Column(name = "tong_tien")
-    private BigDecimal tongTien;
+    private Long tongTien;
 
-    public Integer getIdChiTietDatPhong() {
-        return this.idChiTietDatPhong;
-    }
+    @OneToMany
+    @JoinColumn(name = "setThanhToan")
+    private Set<ThanhToan> thanhToans = new HashSet<>();
 
-    public void setIdChiTietDatPhong(Integer idChiTietDatPhong) {
-        this.idChiTietDatPhong = idChiTietDatPhong;
-    }
 
-    public String getMaChiTietDatPhong() {
-        return this.maChiTietDatPhong;
-    }
-
-    public void setMaChiTietDatPhong(String maChiTietDatPhong) {
-        this.maChiTietDatPhong = maChiTietDatPhong;
-    }
-
-    public Integer getIdDatPhong() {
-        return this.idDatPhong;
-    }
-
-    public void setIdDatPhong(Integer idDatPhong) {
-        this.idDatPhong = idDatPhong;
-    }
-
-    public Integer getIdKhachHang() {
-        return this.idKhachHang;
-    }
-
-    public void setIdKhachHang(Integer idKhachHang) {
-        this.idKhachHang = idKhachHang;
-    }
-
-    public Integer getIdKhuyenMai() {
-        return this.idKhuyenMai;
-    }
-
-    public void setIdKhuyenMai(Integer idKhuyenMai) {
-        this.idKhuyenMai = idKhuyenMai;
-    }
-
-    public Integer getIdChiTietPhong() {
-        return this.idChiTietPhong;
-    }
-
-    public void setIdChiTietPhong(Integer idChiTietPhong) {
-        this.idChiTietPhong = idChiTietPhong;
-    }
-
-    public null getNgayLap() {
-        return this.ngayLap;
-    }
-
-    public void setNgayLap(null ngayLap) {
-        this.ngayLap = ngayLap;
-    }
-
-    public BigDecimal getTongTien() {
-        return this.tongTien;
-    }
-
-    public void setTongTien(BigDecimal tongTien) {
-        this.tongTien = tongTien;
-    }
 }

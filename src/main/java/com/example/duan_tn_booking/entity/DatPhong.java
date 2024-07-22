@@ -1,95 +1,55 @@
+package com.example.duan_tn_booking.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "DatPhong")
 public class DatPhong {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_dat_phong")
     private Integer idDatPhong;
 
     @Column(name = "ma_dat_phong")
     private String maDatPhong;
 
-    @Column(name = "id_khach_hang")
-    private Integer idKhachHang;
+    @ManyToOne
+    @JoinColumn(name = "id_khach_hang",referencedColumnName = "id_khach_hang")
+    private KhachHang khachHang;
 
-    @Column(name = "id_phong")
-    private Integer idPhong;
+    @ManyToOne
+    @JoinColumn(name = "id_phong",referencedColumnName = "id_phong")
+    private Phong phong;
 
     @Column(name = "ngay_nhan_phong")
-    private null ngayNhanPhong;
+    private Date ngayNhanPhong;
 
     @Column(name = "ngay_tra_phong")
-    private null ngayTraPhong;
+    private Date ngayTraPhong;
 
     @Column(name = "tinh_trang")
     private Boolean tinhTrang;
 
-    @Column(name = "id_khuyen_mai")
-    private Integer idKhuyenMai;
+    @ManyToOne
+    @JoinColumn(name = "id_khuyen_mai",referencedColumnName = "id_khuyen_mai")
+    private KhuyenMai khuyenMai;
 
-    public Integer getIdDatPhong() {
-        return this.idDatPhong;
-    }
+    @OneToMany
+    @JoinColumn(name = "setCTDatPhong")
+    private Set<ChiTietDatPhong> chiTietDatPhongs = new HashSet<>();
 
-    public void setIdDatPhong(Integer idDatPhong) {
-        this.idDatPhong = idDatPhong;
-    }
+    @OneToMany
+    @JoinColumn(name = "setLichSuDatPhong")
+    private Set<LichSuDatPhong> lichSuDatPhongs = new HashSet<>();
 
-    public String getMaDatPhong() {
-        return this.maDatPhong;
-    }
-
-    public void setMaDatPhong(String maDatPhong) {
-        this.maDatPhong = maDatPhong;
-    }
-
-    public Integer getIdKhachHang() {
-        return this.idKhachHang;
-    }
-
-    public void setIdKhachHang(Integer idKhachHang) {
-        this.idKhachHang = idKhachHang;
-    }
-
-    public Integer getIdPhong() {
-        return this.idPhong;
-    }
-
-    public void setIdPhong(Integer idPhong) {
-        this.idPhong = idPhong;
-    }
-
-    public null getNgayNhanPhong() {
-        return this.ngayNhanPhong;
-    }
-
-    public void setNgayNhanPhong(null ngayNhanPhong) {
-        this.ngayNhanPhong = ngayNhanPhong;
-    }
-
-    public null getNgayTraPhong() {
-        return this.ngayTraPhong;
-    }
-
-    public void setNgayTraPhong(null ngayTraPhong) {
-        this.ngayTraPhong = ngayTraPhong;
-    }
-
-    public Boolean getTinhTrang() {
-        return this.tinhTrang;
-    }
-
-    public void setTinhTrang(Boolean tinhTrang) {
-        this.tinhTrang = tinhTrang;
-    }
-
-    public Integer getIdKhuyenMai() {
-        return this.idKhuyenMai;
-    }
-
-    public void setIdKhuyenMai(Integer idKhuyenMai) {
-        this.idKhuyenMai = idKhuyenMai;
-    }
 }

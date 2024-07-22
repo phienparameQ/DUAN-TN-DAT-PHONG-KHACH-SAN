@@ -1,10 +1,22 @@
+package com.example.duan_tn_booking.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "TienIchPhong")
 public class TienIchPhong {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tien_ich_phong")
     private Integer idTienIchPhong;
 
@@ -17,35 +29,8 @@ public class TienIchPhong {
     @Column(name = "tinh_trang")
     private Boolean tinhTrang;
 
-    public Integer getIdTienIchPhong() {
-        return this.idTienIchPhong;
-    }
+    @OneToMany
+    @JoinColumn(name = "setPhongTienIch")
+    private Set<PhongTienIch> phongTienIches = new HashSet<>();
 
-    public void setIdTienIchPhong(Integer idTienIchPhong) {
-        this.idTienIchPhong = idTienIchPhong;
-    }
-
-    public String getMaTienIch() {
-        return this.maTienIch;
-    }
-
-    public void setMaTienIch(String maTienIch) {
-        this.maTienIch = maTienIch;
-    }
-
-    public String getTenTienIch() {
-        return this.tenTienIch;
-    }
-
-    public void setTenTienIch(String tenTienIch) {
-        this.tenTienIch = tenTienIch;
-    }
-
-    public Boolean getTinhTrang() {
-        return this.tinhTrang;
-    }
-
-    public void setTinhTrang(Boolean tinhTrang) {
-        this.tinhTrang = tinhTrang;
-    }
 }

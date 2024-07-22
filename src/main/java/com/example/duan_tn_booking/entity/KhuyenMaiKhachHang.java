@@ -1,51 +1,32 @@
+package com.example.duan_tn_booking.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "KhuyenMaiKhachHang")
 public class KhuyenMaiKhachHang {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_kmkh")
     private Integer idKmkh;
 
     @Column(name = "ngay_tham_gia")
-    private null ngayThamGia;
+    private Date ngayThamGia;
 
-    @Column(name = "id_khuyen_mai")
-    private Integer idKhuyenMai;
+    @ManyToOne
+    @JoinColumn(name = "id_khuyen_mai",referencedColumnName = "id_khuyen_mai")
+    private KhuyenMai khuyenMai;
 
     @Column(name = "id_khach_hang")
     private Integer idKhachHang;
 
-    public Integer getIdKmkh() {
-        return this.idKmkh;
-    }
-
-    public void setIdKmkh(Integer idKmkh) {
-        this.idKmkh = idKmkh;
-    }
-
-    public null getNgayThamGia() {
-        return this.ngayThamGia;
-    }
-
-    public void setNgayThamGia(null ngayThamGia) {
-        this.ngayThamGia = ngayThamGia;
-    }
-
-    public Integer getIdKhuyenMai() {
-        return this.idKhuyenMai;
-    }
-
-    public void setIdKhuyenMai(Integer idKhuyenMai) {
-        this.idKhuyenMai = idKhuyenMai;
-    }
-
-    public Integer getIdKhachHang() {
-        return this.idKhachHang;
-    }
-
-    public void setIdKhachHang(Integer idKhachHang) {
-        this.idKhachHang = idKhachHang;
-    }
 }

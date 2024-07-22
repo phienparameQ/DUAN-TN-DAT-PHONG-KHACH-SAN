@@ -1,9 +1,21 @@
+package com.example.duan_tn_booking.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "TaiKhoan")
 public class TaiKhoan {
+
     @Id
     @Column(name = "ten_dang_nhap")
     private String tenDangNhap;
@@ -11,19 +23,12 @@ public class TaiKhoan {
     @Column(name = "mat_khau")
     private String matKhau;
 
-    public String getTenDangNhap() {
-        return this.tenDangNhap;
-    }
+    @OneToMany
+    @JoinColumn(name = "setKhachHang")
+    private Set<KhachHang> khachHangs = new HashSet<>();
 
-    public void setTenDangNhap(String tenDangNhap) {
-        this.tenDangNhap = tenDangNhap;
-    }
+    @OneToMany
+    @JoinColumn(name = "setNhanVien")
+    private Set<NhanVien> nhanViens = new HashSet<>();
 
-    public String getMatKhau() {
-        return this.matKhau;
-    }
-
-    public void setMatKhau(String matKhau) {
-        this.matKhau = matKhau;
-    }
 }

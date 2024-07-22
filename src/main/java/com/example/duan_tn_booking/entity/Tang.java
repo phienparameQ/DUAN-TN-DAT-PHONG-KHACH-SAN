@@ -1,10 +1,21 @@
+package com.example.duan_tn_booking.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Tang")
 public class Tang {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tang")
     private Integer idTang;
 
@@ -12,29 +23,9 @@ public class Tang {
     private String tenTang;
 
     @Column(name = "mo_ta")
-    private null moTa;
+    private String moTa;
 
-    public Integer getIdTang() {
-        return this.idTang;
-    }
-
-    public void setIdTang(Integer idTang) {
-        this.idTang = idTang;
-    }
-
-    public String getTenTang() {
-        return this.tenTang;
-    }
-
-    public void setTenTang(String tenTang) {
-        this.tenTang = tenTang;
-    }
-
-    public null getMoTa() {
-        return this.moTa;
-    }
-
-    public void setMoTa(null moTa) {
-        this.moTa = moTa;
-    }
+    @OneToMany
+    @JoinColumn(name = "setCTPhong")
+    private Set<ChiTietPhong> chiTietPhongs = new HashSet<>();
 }

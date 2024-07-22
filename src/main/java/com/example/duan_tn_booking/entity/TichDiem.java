@@ -1,10 +1,19 @@
+package com.example.duan_tn_booking.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "TichDiem")
 public class TichDiem {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tich_diem")
     private Integer idTichDiem;
 
@@ -12,40 +21,11 @@ public class TichDiem {
     private Integer diemSo;
 
     @Column(name = "ngay_cap_nhap")
-    private null ngayCapNhap;
+    private Data ngayCapNhap;
 
-    @Column(name = "id_khach_hang")
-    private Integer idKhachHang;
+    @ManyToOne
+    @JoinColumn(name = "id_khach_hang",referencedColumnName = "id_khach_hang")
+    private KhachHang khachHang;
 
-    public Integer getIdTichDiem() {
-        return this.idTichDiem;
-    }
 
-    public void setIdTichDiem(Integer idTichDiem) {
-        this.idTichDiem = idTichDiem;
-    }
-
-    public Integer getDiemSo() {
-        return this.diemSo;
-    }
-
-    public void setDiemSo(Integer diemSo) {
-        this.diemSo = diemSo;
-    }
-
-    public null getNgayCapNhap() {
-        return this.ngayCapNhap;
-    }
-
-    public void setNgayCapNhap(null ngayCapNhap) {
-        this.ngayCapNhap = ngayCapNhap;
-    }
-
-    public Integer getIdKhachHang() {
-        return this.idKhachHang;
-    }
-
-    public void setIdKhachHang(Integer idKhachHang) {
-        this.idKhachHang = idKhachHang;
-    }
 }

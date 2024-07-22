@@ -1,10 +1,22 @@
+package com.example.duan_tn_booking.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Phong")
 public class Phong {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_phong")
     private Integer idPhong;
 
@@ -18,56 +30,17 @@ public class Phong {
     private Boolean tinhTrang;
 
     @Column(name = "mo_ta")
-    private null moTa;
+    private String moTa;
 
-    @Column(name = "id_loai_phong")
-    private Integer idLoaiPhong;
+    @ManyToOne
+    @JoinColumn(name = "id_loai_phong",referencedColumnName ="id_loai_phong")
+    private LoaiPhong loaiPhong;
 
-    public Integer getIdPhong() {
-        return this.idPhong;
-    }
+    @OneToMany
+    @JoinColumn(name = "setCTPhong")
+    private Set<ChiTietPhong> chiTietPhongs = new HashSet<>();
 
-    public void setIdPhong(Integer idPhong) {
-        this.idPhong = idPhong;
-    }
-
-    public String getMaPhong() {
-        return this.maPhong;
-    }
-
-    public void setMaPhong(String maPhong) {
-        this.maPhong = maPhong;
-    }
-
-    public String getTenPhong() {
-        return this.tenPhong;
-    }
-
-    public void setTenPhong(String tenPhong) {
-        this.tenPhong = tenPhong;
-    }
-
-    public Boolean getTinhTrang() {
-        return this.tinhTrang;
-    }
-
-    public void setTinhTrang(Boolean tinhTrang) {
-        this.tinhTrang = tinhTrang;
-    }
-
-    public null getMoTa() {
-        return this.moTa;
-    }
-
-    public void setMoTa(null moTa) {
-        this.moTa = moTa;
-    }
-
-    public Integer getIdLoaiPhong() {
-        return this.idLoaiPhong;
-    }
-
-    public void setIdLoaiPhong(Integer idLoaiPhong) {
-        this.idLoaiPhong = idLoaiPhong;
-    }
+    @OneToMany
+    @JoinColumn(name = "setDatPhong")
+    private Set<DatPhong> datPhongs = new HashSet<>();
 }
