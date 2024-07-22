@@ -2,10 +2,14 @@ package com.example.duan_tn_booking.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+import java.util.Date;
+
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -24,7 +28,7 @@ public class ThanhToan {
     private ChiTietDatPhong chiTietDatPhong;
 
     @Column(name = "ngay_thanh_toan")
-    private Data ngayThanhToan;
+    private Date ngayThanhToan;
 
     @Column(name = "phuong_thuc")
     private Boolean phuongThuc;

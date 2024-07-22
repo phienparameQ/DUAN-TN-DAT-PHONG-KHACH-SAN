@@ -2,10 +2,14 @@ package com.example.duan_tn_booking.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+import java.util.Date;
+
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -21,7 +25,7 @@ public class TichDiem {
     private Integer diemSo;
 
     @Column(name = "ngay_cap_nhap")
-    private Data ngayCapNhap;
+    private Date ngayCapNhap;
 
     @ManyToOne
     @JoinColumn(name = "id_khach_hang",referencedColumnName = "id_khach_hang")
